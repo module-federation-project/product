@@ -8,7 +8,7 @@ const cardStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '250px',
+  width: '200px',
   padding: '16px',
   borderRadius: '12px',
   boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
@@ -26,6 +26,9 @@ const listStyle = {
   gap: '48px', // Elemanlar arası boşluk
   padding: '24px',
   justifyContent: 'center',
+  '@media (max-width: 1200px)': {
+    gridTemplateColumns: 'repeat(3, 1fr)', // Küçük ekranlarda 2 sütun
+  },
   '@media (max-width: 900px)': {
     gridTemplateColumns: 'repeat(2, 1fr)', // Küçük ekranlarda 2 sütun
   },
@@ -37,7 +40,7 @@ const listStyle = {
 const ProductCard = product => {
   return (
     <Box sx={cardStyle}>
-      <Typography variant="h6" fontWeight="bold">
+      <Typography variant="body1" fontWeight="bold">
         {product.product.name}
       </Typography>
       <Typography variant="body1" color="secondary">
@@ -49,7 +52,7 @@ const ProductCard = product => {
         defaultValue={1}
         sx={{ width: '80px', margin: '8px 0' }}
       />
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="secondary">
         Sepete Ekle
       </Button>
     </Box>
@@ -58,11 +61,14 @@ const ProductCard = product => {
 
 const App = () => {
   return (
-    <Box className="list" sx={listStyle}>
-      {products.map(item => {
-        return <ProductCard product={item} />;
-      })}
-    </Box>
+    <div>
+      <h2>This is your products micro.</h2>
+      <Box className="list" sx={listStyle}>
+        {products.map(item => {
+          return <ProductCard product={item} />;
+        })}
+      </Box>
+    </div>
   );
 };
 
