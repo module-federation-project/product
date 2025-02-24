@@ -62,7 +62,9 @@ const ProductCard = product => {
 const App = () => {
   return (
     <div>
-      <h2>This is your products micro.</h2>
+      <Typography mb={4} variant="h6">
+        This is your products micro.
+      </Typography>
       <Box className="list" sx={listStyle}>
         {products.map(item => {
           return <ProductCard product={item} />;
