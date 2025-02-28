@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import products from "../common/dummy";
 import { Box, Button, Typography, TextField } from "@mui/material";
-import { useStore } from "shell/store";
 
 const cardStyle = {
   display: "flex",
@@ -39,12 +38,21 @@ const listStyle = {
 };
 
 const ProductCard = (product) => {
-  const { addToCart } = useStore();
   const [quantity, setQuantity] = useState(1);
+  let addToCart;
+
+  try {
+    const store = require("shell/store");
+    addToCart = store.useStore().addToCart;
+  } catch (e) {
+    console.error("shell/store module not found");
+  }
 
   const handleClick = (item, quantity) => {
     console.log("item", { ...item, quantity: quantity });
-    addToCart({ ...item, quantity: quantity });
+    if (addToCart) {
+      addToCart({ ...item, quantity: quantity });
+    }
   };
 
   return (
